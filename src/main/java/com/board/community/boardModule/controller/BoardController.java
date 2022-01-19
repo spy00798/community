@@ -1,11 +1,13 @@
 package com.board.community.boardModule.controller;
 
 import com.board.community.boardModule.service.BoardService;
+import com.board.community.common.db.jpa.entity.BoardEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequiredArgsConstructor
@@ -14,7 +16,7 @@ public class BoardController {
     private final BoardService boardService;
 
     /**
-     * 게시판 조회페이지
+     * FUNCTION:: 게시판 조회 페이지 url매핑
      * @param model
      * @return
      */
@@ -22,4 +24,70 @@ public class BoardController {
     public String boardList(Model model) {
         return boardService.boardList(model);
     }
+
+    /**
+     * FINCTION::  게시글 등록                                                                                                                                                                               페이지 url매핑
+     * @return
+     */
+    @RequestMapping(value = "/create")
+    public String boardInsertForm() {
+        return boardService.boardInsertForm();
+    }
+
+    /**
+     * FUNCTION:: 게시글 등록 처리
+     * @param boardEntity insertForm에서 입력한 데이터
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/createAction", method = RequestMethod.POST)
+    public String boardSave(BoardEntity boardEntity) {
+        return boardService.boardSave(boardEntity);
+    }
+
+    /**
+     * 게시글 상세보기 페이지
+     * @param boardEntity 조회할 게시글 번호
+     * @param model id에 해당하는 게시글의 데이터 출력
+     * @return
+     */
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    public String boardView(BoardEntity boardEntity, Model model) {
+        return boardService.boardView(boardEntity, model);
+    }
+
+    /**
+     * FUNCTION:: 게시글 수정 페이지
+     * @param model 수정하기 전의 게시글 데이터
+     * @param boardEntity 수정하려는 게시글의 idx 번호
+     * @return
+     */
+    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    public String boardUpdateForm(Model model, BoardEntity boardEntity) {
+        return boardService.boardUpdateForm(model, boardEntity);
+    }
+
+    /**
+     * FUNCTION:: 게시글 수정 처리
+     * @param boardEntity updateForm에 입력한 데이터 값
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updateAction", method = RequestMethod.PUT)
+    public String boardModify(BoardEntity boardEntity) {
+        return boardService.boardModify(boardEntity);
+    }
+
+    /**
+     * FUNCTION:: 게시글 삭제 처리
+     * @param boardEntity 삭제하려는 게시글 번호
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    public String boardDelete(BoardEntity boardEntity) {
+        return boardService.boardDelete(boardEntity);
+    }
+
+
 }

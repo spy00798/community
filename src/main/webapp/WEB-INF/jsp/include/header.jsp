@@ -8,9 +8,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title></title>
+    <script src="/static/js/jquery/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/board/board.js?abc=123"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" href="/static/images/temp_icon.ico">
 </head>
 <body>
+<div id="wrap">
+<header>
+    <h1>
+        header
+    </h1>
+</header>
 
-</body>
-</html>

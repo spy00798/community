@@ -7,19 +7,21 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+<%@include file="../include/header.jsp"%>
+
+
     <ul>
         <c:forEach var="list" items="${boardList}">
-            <li>
+            <a href="/view?id=${list.id}"><li>
                 <span>${list.id}</span>
                 <span>${list.title}</span>
                 <span>${list.bdDate}</span>
-            </li>
+            </li></a>
         </c:forEach>
     </ul>
-</body>
-</html>
+    <button onclick="location.href = '/create';">등록</button>
+</div>
+<%@include file="../include/footer.jsp"%>
+<script>
+    document.title= "BoardList";
+</script>

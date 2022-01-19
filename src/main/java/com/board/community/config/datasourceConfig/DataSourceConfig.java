@@ -17,7 +17,7 @@ public class DataSourceConfig {
     @Bean
     @ConfigurationProperties(prefix = "db")
     protected DataSource dataSource() {
-        return DataSourceBuilder.create().build();
+        return DataSourceBuilder.create().build();  //LINE:: application.properties내에 설정한 DB정보를 가지고 DataSource 생성
     }
 
 

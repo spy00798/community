@@ -26,4 +26,7 @@ public class BoardEntity {
     @Column(name = "bd_date", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date bdDate;             // 게시글 등록일
+
+    @Column(name = "writer", nullable = false)
+    private String writer;
 }
