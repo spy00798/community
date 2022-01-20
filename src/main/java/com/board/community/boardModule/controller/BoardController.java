@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequiredArgsConstructor
 public class BoardController {
@@ -21,17 +24,17 @@ public class BoardController {
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String boardList(Model model) {
-        return boardService.boardList(model);
+    public String boardList(Model model, HttpServletRequest request) {
+        return boardService.boardList(model, request);
     }
 
     /**
      * FINCTION::  게시글 등록                                                                                                                                                                               페이지 url매핑
      * @return
      */
-    @RequestMapping(value = "/create")
-    public String boardInsertForm() {
-        return boardService.boardInsertForm();
+    @RequestMapping(value = "/create" )
+    public String boardInsertForm(HttpServletRequest request) {
+        return boardService.boardInsertForm(request);
     }
 
     /**
@@ -41,8 +44,8 @@ public class BoardController {
      */
     @ResponseBody
     @RequestMapping(value = "/createAction", method = RequestMethod.POST)
-    public String boardSave(BoardEntity boardEntity) {
-        return boardService.boardSave(boardEntity);
+    public String boardSave(BoardEntity boardEntity, HttpSession session) {
+        return boardService.boardSave(boardEntity, session);
     }
 
     /**
@@ -52,8 +55,8 @@ public class BoardController {
      * @return
      */
     @RequestMapping(value = "/view", method = RequestMethod.GET)
-    public String boardView(BoardEntity boardEntity, Model model) {
-        return boardService.boardView(boardEntity, model);
+    public String boardView(BoardEntity boardEntity, Model model, HttpServletRequest request) {
+        return boardService.boardView(boardEntity, model, request);
     }
 
     /**
@@ -63,8 +66,8 @@ public class BoardController {
      * @return
      */
     @RequestMapping(value = "/update", method = RequestMethod.GET)
-    public String boardUpdateForm(Model model, BoardEntity boardEntity) {
-        return boardService.boardUpdateForm(model, boardEntity);
+    public String boardUpdateForm(Model model, BoardEntity boardEntity, HttpServletRequest request) {
+        return boardService.boardUpdateForm(model, boardEntity, request);
     }
 
     /**

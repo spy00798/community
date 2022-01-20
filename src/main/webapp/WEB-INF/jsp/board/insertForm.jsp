@@ -9,9 +9,14 @@
 <%@include file="../include/header.jsp"%>
     <form enctype="multipart/form-data" id="createForm">
         <fieldset id="view">
-            <p>제목 : <input type="text" id="title"></p>
-            <p style="vertical-align: top;">내용 : <br><textarea id="content" style="width: 500px; height: 300px; resize: none;"></textarea></p>
-            <input type="button" value="등록하기" onclick="$.boardSave()"/>
+            <p class="title_input"><input type="text" id="title" placeholder="제목"></p>
+            <p id="content-area">
+                <textarea id="content"></textarea>
+            </p>
+            <div class="view">
+                <input type="button" value="등록하기" onclick="$.boardSave()"/>
+                <input type="button" value="뒤로" onclick="history.back();"/>
+            </div>
         </fieldset>
     </form>
 </div>

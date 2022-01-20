@@ -8,4 +8,6 @@ import java.util.Optional;
 
 public interface LoginRepository extends JpaRepository<LoginEntity, Long> {
     Optional<LoginEntity> findByUserIdAndPassword(String userId, String password);
+
+    Optional<LoginEntity> findByUserId(String userId);
 }

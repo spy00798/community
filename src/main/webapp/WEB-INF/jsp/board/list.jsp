@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: KW
@@ -10,16 +10,30 @@
 <%@include file="../include/header.jsp"%>
 
 
-    <ul>
+    <ul id="dataList">
+            <li>
+                <span>번호</span>
+                <span>작성자</span>
+                <span>제목</span>
+                <span>작성일</span>
+            </li>
         <c:forEach var="list" items="${boardList}">
-            <a href="/view?id=${list.id}"><li>
+            <a href="/view?id=${list.id}">
+                <li>
                 <span>${list.id}</span>
+                <span>${list.writer}</span>
                 <span>${list.title}</span>
                 <span>${list.bdDate}</span>
-            </li></a>
+                </li>
+            </a>
         </c:forEach>
     </ul>
-    <button onclick="location.href = '/create';">등록</button>
+    <c:if test="${sessionScope.user.userId != null}">
+        <div class="ins">
+            <button onclick="location.href = '/create';">등록</button>
+        </div>
+    </c:if>
+
 </div>
 <%@include file="../include/footer.jsp"%>
 <script>

@@ -10,11 +10,13 @@
     <form enctype="multipart/form-data" id="updateForm">
         <fieldset id="view">
             <input type="hidden" id="idx" value="${board.id}">
-            <p id="title-area">제목 : <input type="text" id="title" value="${board.title}" /></p>
+            <p class="title_input"><input type="text" id="title" value="${board.title}" /></p>
             <p id="content-area"><textarea id="content">${board.content}</textarea></p>
-            <input type="button" value="수정" onclick="$.boardModify()"/>
-            <input type="button" value="삭제" onclick="$.boardDelete()"/>
-            <input type="button" value="뒤로" onclick="location.replace('/view?id=${board.id}')"/>
+            <div class="btn_area view">
+                <input type="button" value="수정" onclick="$.boardModify()"/>
+                <input type="button" value="삭제" onclick="$.boardDelete()"/>
+                <input type="button" value="뒤로" onclick="location.replace('/view?id=${board.id}')"/>
+            </div>
         </fieldset>
     </form>
 </div>

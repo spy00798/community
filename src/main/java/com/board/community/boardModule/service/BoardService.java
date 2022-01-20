@@ -1,11 +1,14 @@
 package com.board.community.boardModule.service;
 
 import com.board.community.common.db.jpa.entity.BoardEntity;
+import com.board.community.common.db.jpa.entity.LoginEntity;
 import com.board.community.common.db.jpa.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.Optional;
@@ -22,7 +25,7 @@ public class BoardService {
      * @param model
      * @return
      */
-    public String boardList(Model model) {
+    public String boardList(Model model, HttpServletRequest request) {
         model.addAttribute("boardList", boardRepository.findAll());
         return "/board/list";
     }
@@ -31,7 +34,7 @@ public class BoardService {
      * FUNCTION:: 게시글 등록 폼 JSP 페이지 반환
      * @return
      */
-    public String boardInsertForm() {
+    public String boardInsertForm(HttpServletRequest request) {
         return "/board/insertForm";
     }
 
@@ -40,8 +43,11 @@ public class BoardService {
      * @param boardEntity insertForm에서 입력한 데이터
      * @return
      */
-    public String boardSave(BoardEntity boardEntity) {
+    public String boardSave(BoardEntity boardEntity, HttpSession session) {
+        LoginEntity member = (LoginEntity) session.getAttribute("user");
         if(!boardEntity.getTitle().equals("") && !boardEntity.getContent().equals("")){
+            boardEntity.setWriter(member.getUserName());
+            boardEntity.setUserId(member.getUserId());
             boardEntity.setBdDate(new Date());
             boardRepository.save(boardEntity);
 
@@ -58,7 +64,7 @@ public class BoardService {
      * @param model 조회 후 결과값 view.jsp에 출력
      * @return
      */
-    public String boardView(BoardEntity boardEntity, Model model) {
+    public String boardView(BoardEntity boardEntity, Model model, HttpServletRequest request) {
         Optional<BoardEntity> viewData = boardRepository.findById(boardEntity.getId());
         model.addAttribute("board", viewData.get());
 
@@ -71,7 +77,7 @@ public class BoardService {
      * @param boardEntity 수정하려는 게시글 번호
      * @return
      */
-    public String boardUpdateForm(Model model, BoardEntity boardEntity) {
+    public String boardUpdateForm(Model model, BoardEntity boardEntity, HttpServletRequest request) {
         Optional<BoardEntity> updateTarget = boardRepository.findById(boardEntity.getId());
         model.addAttribute("board", updateTarget.get());
         return "/board/updateForm";

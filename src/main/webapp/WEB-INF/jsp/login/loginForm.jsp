@@ -6,19 +6,18 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-    <script src="/static/js/jquery/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/login/login.js"></script>
-</head>
-<body>
-    <form id="loginForm">
-        <fieldset>
-            ID : <input type="text" id="userId"><br>
-            PW : <input type="text" id="password">
-            <input type="button" onclick="$.loginCheck()" value="LOGIN">
-        </fieldset>
-    </form>
-</body>
-</html>
+<%@include file="../include/header.jsp" %>
+<form id="loginForm">
+    <fieldset class="user-form">
+        <div>
+            <input type="text" id="userId"placeholder="ID입력..."><br>
+            <input type="password" id="userPw" placeholder="패스워드 입력...">
+            <div>
+                <input type="button" onclick="location.href = '/join'" value="JOIN" class="btn_item">
+                <input type="button" onclick="$.loginCheck()" value="LOGIN" class="btn_item">
+            </div>
+        </div>
+    </fieldset>
+</form>
+<%@include file="../include/footer.jsp" %>
+

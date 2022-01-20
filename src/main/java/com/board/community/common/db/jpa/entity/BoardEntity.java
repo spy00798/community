@@ -29,4 +29,7 @@ public class BoardEntity {
 
     @Column(name = "writer", nullable = false)
     private String writer;
+
+    @Column(name = "user_id", nullable = false)
+    private String userId;
 }
