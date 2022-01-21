@@ -13,7 +13,7 @@
             <p class="title_input"><input type="text" id="title" value="${board.title}" /></p>
             <p id="content-area"><textarea id="content">${board.content}</textarea></p>
             <div class="btn_area view">
-                <input type="button" value="수정" onclick="$.boardModify()"/>
+                <input type="button" value="수정" onclick="$.boardUpdate()"/>
                 <input type="button" value="삭제" onclick="$.boardDelete()"/>
                 <input type="button" value="뒤로" onclick="location.replace('/view?id=${board.id}')"/>
             </div>

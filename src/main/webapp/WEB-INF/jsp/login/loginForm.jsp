@@ -13,7 +13,7 @@
             <input type="text" id="userId"placeholder="ID입력..."><br>
             <input type="password" id="userPw" placeholder="패스워드 입력...">
             <div>
-                <input type="button" onclick="location.href = '/join'" value="JOIN" class="btn_item">
+                <input type="button" onclick="location.href = '/joinForm'" value="JOIN" class="btn_item">
                 <input type="button" onclick="$.loginCheck()" value="LOGIN" class="btn_item">
             </div>
         </div>

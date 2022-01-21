@@ -1,7 +1,13 @@
+/**
+ * FUNCTION:: ID입력칸에 입력한 데이터를 변경 시 ID 중복체크 값 초기화
+ */
 $.removeIdCheck = function () {
     $("#userId").attr('idCheck', "");
 }
 
+/**
+ * FUNCTION:: 로그인 체크
+ */
 $.loginCheck = function () {
     let param = {
         userId : $('#userId').val(),
@@ -27,6 +33,9 @@ $.loginCheck = function () {
     })
 }
 
+/**
+ * FUNCTION:: ID 중복체크
+ */
 $.idDuplicateCheck = function () {
      
     let param = {
@@ -38,28 +47,34 @@ $.idDuplicateCheck = function () {
         return;
     }
     $.ajax({
-        url: "/idCheck.do",
+        url: "/idCheckAction",
         type: "POST",
         data: param,
         success: function (data) {
             if (data == "duplicated") {
                 alert("이미 사용 중인 아이디입니다.");
-                $('#userId').attr('idCheck', 'N');
+                $('#userId').attr('idCheck', 'N'); // LINE:: ID 중복체크 속성 값을 N으로 변경
                 $('#userId').focus();
             } else {
                 alert("사용 가능한 아이디입니다.")
-                $('#userId').attr('idCheck', 'Y');
+                $('#userId').attr('idCheck', 'Y'); // LINE:: ID 중복체크 속성 값을 Y로 변경
             }
         }
     })
 }
 
+/**
+ * FUNCTION:: 공백입력 막기
+ */
 $.spaceBar = function () {
     let keyCode = event.keyCode;
     if (keyCode == 32)
         event.returnValue = false;
 }
 
+/**
+ * FUNCTION:: 회원가입 처리
+ */
 $.createUser = function () {
     let param = {
         userId: $('#userId').val(),
@@ -67,6 +82,7 @@ $.createUser = function () {
         userName: $('#userNm').val()
     };
 
+    // 유효성 검사
     if($('#userId').val().trim() == "") {
         alert("아이디가 입력되지 않았습니다.");
         return;

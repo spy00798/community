@@ -9,7 +9,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../include/header.jsp"%>
 
-
+<form action="/list" id="search-form">
+<div id="search-area">
+    <select name="option">
+        <option value="all">전체</option>
+        <option value="title">제목</option>
+        <option value="writer">작성자</option>
+    </select>
+    <input type="text" name="keyword" id="keyword" value="${param.keyword}">
+    <input type="submit" id="search-btn" value="검색">
+</div>
+</form>
     <ul id="dataList">
             <li>
                 <span>번호</span>
@@ -30,7 +40,7 @@
     </ul>
     <c:if test="${sessionScope.user.userId != null}">
         <div class="ins">
-            <button onclick="location.href = '/create';">등록</button>
+            <button onclick="location.href = '/createForm';">등록</button>
         </div>
     </c:if>
 

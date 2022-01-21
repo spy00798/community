@@ -27,11 +27,11 @@
         <div>
             <c:choose>
                 <c:when test="${sessionScope.user.userId == null && !fn:contains(pageContext.request.requestURL, '/login') && !fn:contains(pageContext.request.requestURL, '/join')}">
-                    <input type="button" onclick="location.href = '/login'" value="로그인">
-                    <input type="button" onclick="location.href = '/join'" value="회원가입">
+                    <input type="button" onclick="location.href = '/loginForm'" value="로그인">
+                    <input type="button" onclick="location.href = '/joinForm'" value="회원가입">
                 </c:when>
                 <c:when test="${!fn:contains(pageContext.request.requestURL, '/login') && !fn:contains(pageContext.request.requestURL, '/join')}">
-                    <input type="button" onclick="location.href = '/logout'" value="로그아웃">
+                    <input type="button" onclick="location.href = '/logoutAction'" value="로그아웃">
                 </c:when>
             </c:choose>
         </div>

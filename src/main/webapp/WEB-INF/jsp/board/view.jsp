@@ -14,7 +14,7 @@
         <pre id="view-area" style="width: 600px;">${board.content}</pre>
         <div class="view">
             <c:if test="${sessionScope.user.userId == board.userId}">
-                <input type="button" value="수정하기" onclick="location.href = '/update?id=${board.id}'"/>
+                <input type="button" value="수정하기" onclick="location.href = '/updateForm?id=${board.id}'"/>
             </c:if>
             <input type="button" value="목록" onclick="location.href= '/list';"/>
         </div>

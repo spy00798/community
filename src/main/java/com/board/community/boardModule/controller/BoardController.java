@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,22 +20,22 @@ public class BoardController {
     private final BoardService boardService;
 
     /**
-     * FUNCTION:: 게시판 조회 페이지 url매핑
+     * FUNCTION:: 게시판 조회 페이지 url 매핑
      * @param model
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String boardList(Model model, HttpServletRequest request) {
-        return boardService.boardList(model, request);
+    public String boardList(@RequestParam(value = "option", required = false) String option, @RequestParam(value = "keyword", required = false) String keyword, Model model, HttpServletRequest request) {
+        return boardService.boardList(option, keyword, model, request);
     }
 
     /**
-     * FINCTION::  게시글 등록                                                                                                                                                                               페이지 url매핑
+     * FINCTION::  게시글 등록 페이지                                                                                                                                                                          페이지 url매핑
      * @return
      */
-    @RequestMapping(value = "/create" )
-    public String boardInsertForm(HttpServletRequest request) {
-        return boardService.boardInsertForm(request);
+    @RequestMapping(value = "/createForm" )
+    public String boardCreateForm(HttpServletRequest request) {
+        return boardService.boardCreateForm(request);
     }
 
     /**
@@ -44,8 +45,8 @@ public class BoardController {
      */
     @ResponseBody
     @RequestMapping(value = "/createAction", method = RequestMethod.POST)
-    public String boardSave(BoardEntity boardEntity, HttpSession session) {
-        return boardService.boardSave(boardEntity, session);
+    public String boardCreateAction(BoardEntity boardEntity, HttpSession session) {
+        return boardService.boardCreateAction(boardEntity, session);
     }
 
     /**
@@ -65,7 +66,7 @@ public class BoardController {
      * @param boardEntity 수정하려는 게시글의 idx 번호
      * @return
      */
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    @RequestMapping(value = "/updateForm", method = RequestMethod.GET)
     public String boardUpdateForm(Model model, BoardEntity boardEntity, HttpServletRequest request) {
         return boardService.boardUpdateForm(model, boardEntity, request);
     }
@@ -77,8 +78,8 @@ public class BoardController {
      */
     @ResponseBody
     @RequestMapping(value = "/updateAction", method = RequestMethod.PUT)
-    public String boardModify(BoardEntity boardEntity) {
-        return boardService.boardModify(boardEntity);
+    public String boardUpdateAction(BoardEntity boardEntity) {
+        return boardService.boardUpdateAction(boardEntity);
     }
 
     /**
@@ -87,10 +88,12 @@ public class BoardController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public String boardDelete(BoardEntity boardEntity) {
-        return boardService.boardDelete(boardEntity);
+    @RequestMapping(value = "/deleteAction", method = RequestMethod.DELETE)
+    public String boardDeleteAction(BoardEntity boardEntity) {
+        return boardService.boardDeleteAction(boardEntity);
     }
+
+
 
 
 }

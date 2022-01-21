@@ -28,8 +28,8 @@ public class BoardEntity {
     private Date bdDate;             // 게시글 등록일
 
     @Column(name = "writer", nullable = false)
-    private String writer;
+    private String writer;           // 작성자
 
     @Column(name = "user_id", nullable = false)
-    private String userId;
+    private String userId;           // 작성자 ID
 }

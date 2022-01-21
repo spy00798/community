@@ -12,14 +12,14 @@ public class LoginEntity {
     @Id
     @Column(name = "idx", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long id;            // 회원 번호
 
     @Column(name = "user_id", nullable = false, unique = true)
-    private String userId;
+    private String userId;      // 아이디
 
     @Column(name = "user_pw", nullable = false)
-    private String password;
+    private String password;    // 패스워드
 
     @Column(name = "user_nm", nullable = false)
-    private String userName;
+    private String userName;    // 사용자 이름
 }

@@ -14,7 +14,7 @@
                 <textarea id="content"></textarea>
             </p>
             <div class="view">
-                <input type="button" value="등록하기" onclick="$.boardSave()"/>
+                <input type="button" value="등록하기" onclick="$.boardCreate()"/>
                 <input type="button" value="뒤로" onclick="history.back();"/>
             </div>
         </fieldset>

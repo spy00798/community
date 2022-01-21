@@ -21,47 +21,52 @@ public class LoginController {
      * FUNCTION:: 로그인 페이지
      * @return
      */
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/loginForm", method = RequestMethod.GET)
     public String loginForm() {
         return loginService.loginForm();
     }
 
     /**
      * FUNCTION:: 로그인 체크
-     * @param loginEntity
+     * @param loginEntity 로그인 페이지에 입력한 데이터
      * @param request
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/loginAction", method = RequestMethod.POST)
-    public String loginAjax(LoginEntity loginEntity, HttpServletRequest request) {
-        return loginService.loginAjax(loginEntity, request);
+    public String loginAction(LoginEntity loginEntity, HttpServletRequest request) {
+        return loginService.loginAction(loginEntity, request);
     }
 
     /**
      * FUNCTION:: 회원가입 페이지
      * @return
      */
-    @RequestMapping(value = "/join", method = RequestMethod.GET)
+    @RequestMapping(value = "/joinForm", method = RequestMethod.GET)
     public String joinForm() {
         return loginService.joinForm();
     }
 
     /**
      * FUNCTION:: ID 중복체크
-     * @param loginEntity
+     * @param loginEntity 회원가입 페이지 내에 있는 ID입력칸에 입력한 데이터
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/idCheck.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/idCheckAction", method = RequestMethod.POST)
     public String idDuplicateCheck(LoginEntity loginEntity) {
         return loginService.idDuplicateCheck(loginEntity);
     }
 
+    /**
+     * 회원가입 처리
+     * @param loginEntity 회원가입 페이지에 작성한 데이터
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/joinAction", method = RequestMethod.POST)
-    public String joinAjax(LoginEntity loginEntity) {
-        return loginService.joinAjax(loginEntity);
+    public String joinAction(LoginEntity loginEntity) {
+        return loginService.joinAction(loginEntity);
     }
 
     /**
@@ -69,7 +74,7 @@ public class LoginController {
      * @param session
      * @return
      */
-    @RequestMapping(value = "/logout")
+    @RequestMapping(value = "/logoutAction")
     public String logoutAction(HttpSession session) {
         return loginService.logoutAction(session);
     }
