@@ -2,6 +2,7 @@ package com.board.community.common.db.jpa.entity;
 
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "tbl_board")
+@DynamicUpdate
 public class BoardEntity {
 
     @Id

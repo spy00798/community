@@ -1,12 +1,14 @@
 package com.board.community.common.db.jpa.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "tbl_user")
+@DynamicUpdate
 public class LoginEntity {
 
     @Id

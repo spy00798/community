@@ -26,7 +26,7 @@ public class BoardController {
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String boardList(@RequestParam(value = "option", required = false) String option, @RequestParam(value = "keyword", required = false) String keyword, Model model, HttpServletRequest request) {
-        return boardService.boardList(option, keyword, model, request);
+        return boardService.BoardList(option, keyword, model, request);
     }
 
     /**
@@ -35,7 +35,7 @@ public class BoardController {
      */
     @RequestMapping(value = "/createForm" )
     public String boardCreateForm(HttpServletRequest request) {
-        return boardService.boardCreateForm(request);
+        return boardService.BoardCreateForm(request);
     }
 
     /**
@@ -46,7 +46,7 @@ public class BoardController {
     @ResponseBody
     @RequestMapping(value = "/createAction", method = RequestMethod.POST)
     public String boardCreateAction(BoardEntity boardEntity, HttpSession session) {
-        return boardService.boardCreateAction(boardEntity, session);
+        return boardService.BoardCreateAction(boardEntity, session);
     }
 
     /**
@@ -57,7 +57,7 @@ public class BoardController {
      */
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String boardView(BoardEntity boardEntity, Model model, HttpServletRequest request) {
-        return boardService.boardView(boardEntity, model, request);
+        return boardService.BoardView(boardEntity, model, request);
     }
 
     /**
@@ -68,7 +68,7 @@ public class BoardController {
      */
     @RequestMapping(value = "/updateForm", method = RequestMethod.GET)
     public String boardUpdateForm(Model model, BoardEntity boardEntity, HttpServletRequest request) {
-        return boardService.boardUpdateForm(model, boardEntity, request);
+        return boardService.BoardUpdateForm(model, boardEntity, request);
     }
 
     /**
@@ -79,7 +79,7 @@ public class BoardController {
     @ResponseBody
     @RequestMapping(value = "/updateAction", method = RequestMethod.PUT)
     public String boardUpdateAction(BoardEntity boardEntity) {
-        return boardService.boardUpdateAction(boardEntity);
+        return boardService.BoardUpdateAction(boardEntity);
     }
 
     /**
@@ -90,7 +90,7 @@ public class BoardController {
     @ResponseBody
     @RequestMapping(value = "/deleteAction", method = RequestMethod.DELETE)
     public String boardDeleteAction(BoardEntity boardEntity) {
-        return boardService.boardDeleteAction(boardEntity);
+        return boardService.BoardDeleteAction(boardEntity);
     }
 
 

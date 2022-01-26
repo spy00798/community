@@ -3,6 +3,8 @@ package com.board.community.boardModule.service;
 import com.board.community.common.db.jpa.entity.BoardEntity;
 import com.board.community.common.db.jpa.entity.LoginEntity;
 import com.board.community.common.db.jpa.repository.BoardRepository;
+import com.board.community.common.db.jpa.repository.CommentRepository;
+import com.board.community.common.db.jpa.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.exception.DataException;
 import org.springframework.orm.jpa.JpaSystemException;
@@ -13,6 +15,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -23,13 +26,15 @@ import java.util.Optional;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final CommentRepository commentRepository;
+    private final ReplyRepository replyRepository;
 
     /**
      * FUNCTION:: DB에 저장된 게시글 목록 조회 후 JSP에 데이터 전달
      * @param model
      * @return
      */
-    public String boardList(String option, String keyword, Model model, HttpServletRequest request) {
+    public String BoardList(String option, String keyword, Model model, HttpServletRequest request) {
         if (option != null && option.equals("title")) { //LINE:: 검색옵션을 제목으로 설정
             model.addAttribute("boardList", boardRepository.findByTitleContainingIgnoreCase(keyword));
         } else if (option != null && option.equals("writer")) { //LINE:: 검색옵션을 작성자로 설정
@@ -46,7 +51,7 @@ public class BoardService {
      * FUNCTION:: 게시글 등록 폼 JSP 페이지 반환
      * @return
      */
-    public String boardCreateForm(HttpServletRequest request) {
+    public String BoardCreateForm(HttpServletRequest request) {
         return "/board/createForm";
     }
 
@@ -55,7 +60,7 @@ public class BoardService {
      * @param boardEntity insertForm에서 입력한 데이터
      * @return
      */
-    public String boardCreateAction(BoardEntity boardEntity, HttpSession session) {
+    public String BoardCreateAction(BoardEntity boardEntity, HttpSession session) {
         LoginEntity member = (LoginEntity) session.getAttribute("user"); //LINE:: 로그인한 사용자의 세션을 가져옴
         try {
             boardEntity.setWriter(member.getUserName()); //LINE:: 가져온 세션에 존재하는 회원 데이터로 작성자 데이터 설정
@@ -75,10 +80,12 @@ public class BoardService {
      * @param model 조회 후 결과값 view.jsp에 출력
      * @return
      */
-    public String boardView(BoardEntity boardEntity, Model model, HttpServletRequest request) {
+    public String BoardView(BoardEntity boardEntity, Model model, HttpServletRequest request) {
         Optional<BoardEntity> viewData = boardRepository.findById(boardEntity.getId()); //LINE:: Null값이 발생했을 때 처리를 하기위해 Optional객체 사용
         if (viewData.isPresent()) { //LINE:: 해당 번호의 게시글의 데이터가 존재할 때만 페이지에 출력
             model.addAttribute("board", viewData.get());
+            model.addAttribute("comment", commentRepository.findAllByBoardIdx(boardEntity.getId()));
+            model.addAttribute("reply", replyRepository.findAllByBoardIdx(boardEntity.getId()));
         }
 
 
@@ -91,7 +98,7 @@ public class BoardService {
      * @param boardEntity 수정하려는 게시글 번호
      * @return
      */
-    public String boardUpdateForm(Model model, BoardEntity boardEntity, HttpServletRequest request) {
+    public String BoardUpdateForm(Model model, BoardEntity boardEntity, HttpServletRequest request) {
         BoardEntity updateTarget = boardRepository.getById(boardEntity.getId()); //LINE:: 게시글의 수정 전 데이터를 가져옴.
         model.addAttribute("board", updateTarget);
         return "/board/updateForm";
@@ -102,7 +109,7 @@ public class BoardService {
      * @param boardEntity 수정할 게시글 번호, 수정 데이터
      * @return
      */
-    public String boardUpdateAction(BoardEntity boardEntity) {
+    public String BoardUpdateAction(BoardEntity boardEntity) {
             Optional<BoardEntity> updateTarget = boardRepository.findById(boardEntity.getId());
             updateTarget.ifPresent(target -> {                  //LINE:: Optional 객체 내에 있는 값이 존재할 경우 함수 안의 로직을 실행
                 target.setId(boardEntity.getId());
@@ -119,7 +126,7 @@ public class BoardService {
      * @param boardEntity 삭제하려는 게시글 번호
      * @return
      */
-    public String boardDeleteAction(BoardEntity boardEntity) {
+    public String BoardDeleteAction(BoardEntity boardEntity) {
             boardRepository.deleteById(boardEntity.getId());
             return "success";
     }

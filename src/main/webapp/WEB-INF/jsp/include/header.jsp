@@ -15,6 +15,8 @@
     <script src="/static/js/jquery/jquery-3.6.0.min.js"></script>
     <script src="/static/js/board/board.js?abc=123"></script>
     <script src="/static/js/login/login.js?abc=123"></script>
+    <script src="/static/js/board/comment.js?abc=123"></script>
+    <script src="/static/js/board/reply.js?abc=123"></script>
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="icon" href="/static/images/temp_icon.ico">
 </head>

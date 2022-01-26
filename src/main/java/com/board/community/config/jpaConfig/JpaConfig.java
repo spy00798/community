@@ -52,7 +52,6 @@ public class JpaConfig {
         jpaProperties.setProperty("hibernate.format_sql", "true");              //LINE:: SQL 쿼리문 줄바꿈 처리
         jpaProperties.setProperty("hibernate.hbm2ddl.auto", "update");          //LINE:: DB에 스키마 자동생성
         jpaProperties.setProperty("hibernate.use_sql_comments", "true");        //LINE:: SQL 실행문 콘솔에 출력
-
         return jpaProperties;
     }
 

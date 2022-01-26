@@ -30,10 +30,10 @@
         <c:forEach var="list" items="${boardList}">
             <a href="/view?id=${list.id}">
                 <li>
-                <span>${list.id}</span>
-                <span>${list.writer}</span>
-                <span>${list.title}</span>
-                <span>${list.bdDate}</span>
+                    <span>${list.id}</span>
+                    <span>${list.writer}</span>
+                    <span>${list.title}</span>
+                    <span>${list.bdDate}</span>
                 </li>
             </a>
         </c:forEach>

@@ -14,23 +14,41 @@ $.loginCheck = function () {
         password : $("#userPw").val()
     };
 
-    $.ajax({
-        url: "/loginAction",
-        type: "POST",
-        data: param,
-        success: function (data) {
-            console.log(data);
-            if (data == "success") {
-                location.replace("/list");
-            } else if(data == "failed") {
-                alert("비밀번호를 확인해주세요");
-                return;
-            } else {
-                alert("존재하지 않는 아이디입니다");
-                return;
+    if($('#userId').val().trim() == "") {
+        alert("아이디가 입력되지 않았습니다.");
+        return;
+    } else if ($('#userPw').val().trim() == "") {
+        alert("패스워드가 입력되지 않았습니다.");
+        return;
+    } else {
+        $.ajax({
+            url: "/loginAction",
+            type: "POST",
+            data: param,
+            success: function (data) {
+                console.log(data);
+
+                let parseData = JSON.parse(data);
+                $.each(parseData, function (i, item) {
+                    if (item == "success") {
+                        if (document.referrer && document.referrer.indexOf("localhost") != -1) {
+                            location.replace(document.referrer);
+                        } else {
+                            location.replace("/list")
+                        }
+                    } else if(item == "failed") {
+                        alert("비밀번호를 확인해주세요");
+                        return;
+                    } else {
+                        alert("존재하지 않는 아이디입니다");
+                        return;
+                    }
+                })
+
             }
-        }
-    })
+        });
+    }
+
 }
 
 /**
@@ -100,7 +118,7 @@ $.createUser = function () {
             success: function (data) {
                 if(data == "success") {
                     alert("가입완료");
-                    location.replace("/login");
+                    location.replace("/loginForm");
                 }
             },
             error: function () {

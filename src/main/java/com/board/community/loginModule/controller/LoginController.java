@@ -23,7 +23,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/loginForm", method = RequestMethod.GET)
     public String loginForm() {
-        return loginService.loginForm();
+        return loginService.LoginForm();
     }
 
     /**
@@ -35,7 +35,7 @@ public class LoginController {
     @ResponseBody
     @RequestMapping(value = "/loginAction", method = RequestMethod.POST)
     public String loginAction(LoginEntity loginEntity, HttpServletRequest request) {
-        return loginService.loginAction(loginEntity, request);
+        return loginService.LoginAction(loginEntity, request);
     }
 
     /**
@@ -44,7 +44,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/joinForm", method = RequestMethod.GET)
     public String joinForm() {
-        return loginService.joinForm();
+        return loginService.JoinForm();
     }
 
     /**
@@ -55,7 +55,7 @@ public class LoginController {
     @ResponseBody
     @RequestMapping(value = "/idCheckAction", method = RequestMethod.POST)
     public String idDuplicateCheck(LoginEntity loginEntity) {
-        return loginService.idDuplicateCheck(loginEntity);
+        return loginService.IdDuplicateCheck(loginEntity);
     }
 
     /**
@@ -66,7 +66,7 @@ public class LoginController {
     @ResponseBody
     @RequestMapping(value = "/joinAction", method = RequestMethod.POST)
     public String joinAction(LoginEntity loginEntity) {
-        return loginService.joinAction(loginEntity);
+        return loginService.JoinAction(loginEntity);
     }
 
     /**
@@ -76,6 +76,6 @@ public class LoginController {
      */
     @RequestMapping(value = "/logoutAction")
     public String logoutAction(HttpSession session) {
-        return loginService.logoutAction(session);
+        return loginService.LogoutAction(session);
     }
 }
