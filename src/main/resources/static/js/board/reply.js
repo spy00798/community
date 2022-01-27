@@ -18,7 +18,7 @@ $.replyCreate = function (e) {
         commentGroup: $('.reply-form:eq('+ index +')').parent().find('.comment_idx').val(),
         boardIdx: $('#idx').val(),
         commentIdx: $('.comment_idx:eq('+ index +')').val(),
-        content: $('.reply:eq('+ index +')').val()
+        comment: $('.reply:eq('+ index +')').val()
     }
 
     console.log(JSON.stringify(param));

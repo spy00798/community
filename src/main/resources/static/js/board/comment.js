@@ -30,14 +30,14 @@ $(document).ready(function () {
                     '                                   onclick="$.replyForm(this)">' +
                     '                        </div>' +
                     // '                    </c:if>' +
-                    // '                    <div class="reply-form">' +
-                    // '                        <p><span style="margin: 20px;">'+ item.writer +' 님께 답글 작성</span></p>' +
-                    // '                        <textarea class="reply"></textarea>' +
-                    // '                        <div class="btn_area">' +
-                    // '                            <input type="button" value="취소" class="cl_btn" onclick="$.replyClose(this)">' +
-                    // '                            <input type="button" value="완료" class="cr_btn" onclick="$.replyCreate(this)">' +
-                    // '                        </div>' +
-                    // '                    </div>' +
+                    '                    <div class="reply-form">' +
+                    '                        <p><span style="margin: 20px;">'+ item.writer +' 님께 답글 작성</span></p>' +
+                    '                        <textarea class="reply"></textarea>' +
+                    '                        <div class="btn_area">' +
+                    '                            <input type="button" value="취소" class="cl_btn" onclick="$.replyClose(this)">' +
+                    '                            <input type="button" value="완료" class="cr_btn" onclick="$.replyCreate(this)">' +
+                    '                        </div>' +
+                    '                    </div>' +
                     '                </li>'
 
                 $("#comment-area > ul").append(str);

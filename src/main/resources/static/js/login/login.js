@@ -31,11 +31,12 @@ $.loginCheck = function () {
                 let parseData = JSON.parse(data);
                 $.each(parseData, function (i, item) {
                     if (item == "success") {
-                        if (document.referrer && document.referrer.indexOf("localhost") != -1) {
-                            location.replace(document.referrer);
-                        } else {
-                            location.replace("/list")
-                        }
+                        location.replace("/list")
+                        // if (document.referrer && document.referrer.indexOf("localhost") != -1) {
+                        //     location.replace(document.referrer);
+                        // } else {
+                        //     location.replace("/list")
+                        // }
                     } else if(item == "failed") {
                         alert("비밀번호를 확인해주세요");
                         return;

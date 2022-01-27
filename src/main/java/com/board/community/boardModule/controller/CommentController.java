@@ -46,4 +46,10 @@ public class CommentController {
     public List<CommentEntity> CommentList(CommentEntity commentEntity) {
         return commentService.CommentList(commentEntity);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/replyCreateAction")
+    public String ReplyCreateAction(CommentEntity commentEntity, HttpSession session) {
+        return commentService.ReplyCreateAction(commentEntity, session);
+    }
 }

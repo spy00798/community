@@ -25,16 +25,17 @@ public class CommentService {
      * @return
      */
     public String CommentCreateAction(CommentEntity commentEntity, HttpSession session) {
-        LoginEntity loginEntity = (LoginEntity) session.getAttribute("user");
+        LoginEntity userInfo = (LoginEntity) session.getAttribute("user");
 
 
         commentEntity.setCommentDate(new Date());
-        commentEntity.setWriter(loginEntity.getUserName());
-        commentEntity.setUserId(loginEntity.getUserId());
-//        commentEntity.setReplySequence(commentRepository.getByBoardIdxAndDepth(commentEntity.getBoardIdx(), 0) + 1);
+        commentEntity.setWriter(userInfo.getUserName());
+        commentEntity.setUserId(userInfo.getUserId());
+        commentEntity.setReplySequence(commentRepository.countByBoardIdxAndDepth(commentEntity.getBoardIdx(), 0) + 1); //   댓글의 순서 설정
+        commentEntity.setDepth(0);  //댓글의 depth설정
 
         commentRepository.save(commentEntity);
-        commentRepository.updateCommentGroup();
+        commentRepository.updateCommentGroup(); // 등록 후 댓글의 소속을 자신의 idx로 변경
 
         return "success";
     }
@@ -76,8 +77,27 @@ public class CommentService {
 
     }
 
+    /**
+     * FUNCTION:: 댓글 리스트 출력
+     * @param commentEntity 댓글의 부모 게시글 번호
+     * @return
+     */
     public List<CommentEntity> CommentList(CommentEntity commentEntity) {
 
         return commentRepository.findAllByBoardIdx(commentEntity.getBoardIdx());
+    }
+
+    public String ReplyCreateAction(CommentEntity commentEntity, HttpSession session) {
+        CommentEntity parentComment = commentRepository.getById(Long.valueOf(commentEntity.getCommentGroup())); // 답글이 달리는 부모 댓글의 데이터를 가져옴
+        LoginEntity userInfo = (LoginEntity) session.getAttribute("user");
+
+        commentEntity.setCommentDate(new Date());
+        commentEntity.setDepth(parentComment.getDepth() + 1);// 답글의 depth설정
+        commentEntity.setReplySequence(commentRepository.countByBoardIdxAndDepthAndCommentGroup(parentComment.getBoardIdx(), (parentComment.getDepth() + 1), commentEntity.getCommentGroup()) + 1 ); // 답글의 순서
+        commentEntity.setWriter(userInfo.getUserName());
+        commentEntity.setUserId(userInfo.getUserId());
+        commentRepository.save(commentEntity);
+
+        return "success";
     }
 }

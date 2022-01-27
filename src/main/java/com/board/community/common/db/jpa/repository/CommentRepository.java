@@ -11,10 +11,11 @@ import java.util.List;
 public interface CommentRepository extends JpaRepository<CommentEntity, Long> {
     List<CommentEntity> findAllByBoardIdx(Long id);
 
-    CommentEntity getByBoardIdxAndDepth(Long boardIdx, Long depth);
-
+    Integer countByBoardIdxAndDepth(long boardIdx, Integer depth);
     @Transactional
     @Modifying
     @Query(value = "update tbl_comment set commentGroup = idx where depth = 0", nativeQuery = true)
     void updateCommentGroup();
+
+    Integer countByBoardIdxAndDepthAndCommentGroup(long boardIdx, Integer depth, Integer commentGroup);
 }
