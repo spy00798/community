@@ -55,6 +55,9 @@ public class CommentService {
             commentEntity.setWriter(item.getWriter());
             commentEntity.setBoardIdx(item.getBoardIdx());
             commentEntity.setCommentDate(item.getCommentDate());
+            commentEntity.setCommentGroup(item.getCommentGroup());
+            commentEntity.setDepth(item.getDepth());
+            commentEntity.setReplySequence(item.getReplySequence());
 
 
             commentRepository.save(commentEntity);
