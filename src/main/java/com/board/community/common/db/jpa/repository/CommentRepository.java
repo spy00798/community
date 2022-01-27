@@ -11,7 +11,7 @@ import java.util.List;
 public interface CommentRepository extends JpaRepository<CommentEntity, Long> {
     List<CommentEntity> findAllByBoardIdx(Long id);
 
-    CommentEntity getByBoardIdx(Long boardIdx);
+    CommentEntity getByBoardIdxAndDepth(Long boardIdx, Long depth);
 
     @Transactional
     @Modifying
