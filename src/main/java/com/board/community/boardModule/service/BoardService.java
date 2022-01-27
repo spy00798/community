@@ -4,10 +4,7 @@ import com.board.community.common.db.jpa.entity.BoardEntity;
 import com.board.community.common.db.jpa.entity.LoginEntity;
 import com.board.community.common.db.jpa.repository.BoardRepository;
 import com.board.community.common.db.jpa.repository.CommentRepository;
-import com.board.community.common.db.jpa.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.exception.DataException;
-import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -15,9 +12,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,7 +22,6 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
     private final CommentRepository commentRepository;
-    private final ReplyRepository replyRepository;
 
     /**
      * FUNCTION:: DB에 저장된 게시글 목록 조회 후 JSP에 데이터 전달
@@ -84,8 +78,8 @@ public class BoardService {
         Optional<BoardEntity> viewData = boardRepository.findById(boardEntity.getId()); //LINE:: Null값이 발생했을 때 처리를 하기위해 Optional객체 사용
         if (viewData.isPresent()) { //LINE:: 해당 번호의 게시글의 데이터가 존재할 때만 페이지에 출력
             model.addAttribute("board", viewData.get());
-            model.addAttribute("comment", commentRepository.findAllByBoardIdx(boardEntity.getId()));
-            model.addAttribute("reply", replyRepository.findAllByBoardIdx(boardEntity.getId()));
+//            model.addAttribute("comment", commentRepository.findAllByBoardIdx(boardEntity.getId()));
+//            model.addAttribute("reply", replyRepository.findAllByBoardIdx(boardEntity.getId()));
         }
 
 

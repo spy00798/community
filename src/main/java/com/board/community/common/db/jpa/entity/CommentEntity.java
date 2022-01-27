@@ -26,12 +26,21 @@ public class CommentEntity {
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date commentDate;     // 댓글 작성일
+    private Date commentDate;          // 댓글 작성일
 
     @Column(nullable = false)
-    private long boardIdx;          // 게시글 번호
+    private long boardIdx;             // 게시글 번호
+
+    @Column
+    private Integer depth;             // 답글의 depth
+
+    @Column
+    private Integer commentGroup;      // 답글의 소속(댓글 번호)
+
+    @Column
+    private Integer replySequence ;    // 답글의 순서
 
     @Column(name = "user_id", nullable = false)
-    private String userId;           // 작성자 ID
+    private String userId;             // 작성자 ID
 
 }

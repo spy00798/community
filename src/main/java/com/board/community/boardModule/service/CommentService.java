@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,11 +27,14 @@ public class CommentService {
     public String CommentCreateAction(CommentEntity commentEntity, HttpSession session) {
         LoginEntity loginEntity = (LoginEntity) session.getAttribute("user");
 
+
         commentEntity.setCommentDate(new Date());
         commentEntity.setWriter(loginEntity.getUserName());
         commentEntity.setUserId(loginEntity.getUserId());
+//        commentEntity.setReplySequence(commentRepository.getByBoardIdx(commentEntity.getBoardIdx()) + 1);
 
         commentRepository.save(commentEntity);
+        commentRepository.updateCommentGroup();
 
         return "success";
     }
@@ -51,6 +55,7 @@ public class CommentService {
             commentEntity.setBoardIdx(item.getBoardIdx());
             commentEntity.setCommentDate(item.getCommentDate());
 
+
             commentRepository.save(commentEntity);
         });
 
@@ -69,5 +74,10 @@ public class CommentService {
 
         return "success";
 
+    }
+
+    public List<CommentEntity> CommentList(CommentEntity commentEntity) {
+
+        return commentRepository.findAllByBoardIdx(commentEntity.getBoardIdx());
     }
 }

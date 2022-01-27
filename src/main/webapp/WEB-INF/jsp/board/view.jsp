@@ -39,41 +39,35 @@
         </c:otherwise>
     </c:choose>
 
-    <div id="comment-area" style="width: 600px; min-height: 300px; border: 1px solid #ddd; margin: 50px auto;">
+    <div id="comment-area">
         <ul>
 <%--            <c:forEach items="${comment}" var="comment">--%>
-<%--                <li style="min-height: 100px; border-bottom: 1px solid #ddd;">--%>
+<%--                <li class="comment">--%>
 <%--                    <p>--%>
 <%--                        <input type="hidden" class="comment_idx" value="${comment.idx}">--%>
-<%--                        <span style="margin: 20px; font-weight: bold;">${comment.writer}</span>--%>
-<%--                        <span style="font-size: 14px; color: #999"><fmt:formatDate value="${comment.commentDate}"--%>
-<%--                                                                                   pattern="YYYY-MM-DD HH:mm:ss"></fmt:formatDate></span>--%>
+<%--                        <span class="comment_writer">${comment.writer}</span>--%>
+<%--                        <span class="comment_date">${comment.commentDate}</span>--%>
 <%--                    </p>--%>
-<%--                    <pre style="padding-left: 40px; width: 530px; min-height: 50px; word-break: break-all; white-space: normal; margin-top: 20px;"--%>
-<%--                         class="comment">${comment.comment}</pre>--%>
+<%--                    <pre--%>
+<%--                         class="comment_text">${comment.comment}</pre>--%>
 <%--                    <c:if test="${sessionScope.user != null}">--%>
 <%--                        <div style="width: 100%; height: 30px;" class="btn_area">--%>
 <%--                            <c:if test="${comment.userId == sessionScope.user.userId}">--%>
 <%--                                <input type="button" value="삭제" class="del_btn" style="float: right; margin: 0 10px;"--%>
 <%--                                       onclick="$.commentDelete(this)">--%>
-<%--                                <input type="button" value="수정" class="up_btn" style="float: right;"--%>
+<%--                                <input type="button" value="수정" class="up_btn"--%>
 <%--                                       onclick="$.commentUpdateForm(this)">--%>
 <%--                            </c:if>--%>
 <%--                            <input type="button" value="답글" class="re_btn" style="float: right;margin-right: 10px;"--%>
 <%--                                   onclick="$.replyForm(this)">--%>
 <%--                        </div>--%>
 <%--                    </c:if>--%>
-<%--                    <div style="min-height: 100px; border-top: 1px solid black; display: none;"--%>
-<%--                         class="reply-form">--%>
+<%--                    <div class="reply-form">--%>
 <%--                        <p><span style="margin: 20px;">${comment.writer} 님께 답글 작성</span></p>--%>
-<%--                        <textarea--%>
-<%--                                style='margin-left: 40px; width: 520px; min-height: 50px; margin-top: 20px; word-break: break-all; white-space: normal; resize: none;'--%>
-<%--                                class='reply'></textarea>--%>
-<%--                        <div style="width: 100%; height: 30px; line-height: 30px;">--%>
-<%--                            <input type="button" value="취소" class="cl_btn" style="float: right; margin: 0 10px;"--%>
-<%--                                   onclick="$.replyClose(this)">--%>
-<%--                            <input type="button" value="완료" class="cr_btn" style="float: right;"--%>
-<%--                                   onclick="$.replyCreate(this)">--%>
+<%--                        <textarea class='reply'></textarea>--%>
+<%--                        <div class="btn_area">--%>
+<%--                            <input type="button" value="취소" class="cl_btn" onclick="$.replyClose(this)">--%>
+<%--                            <input type="button" value="완료" class="cr_btn" onclick="$.replyCreate(this)">--%>
 <%--                        </div>--%>
 <%--                    </div>--%>
 <%--                </li>--%>

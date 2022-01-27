@@ -15,6 +15,7 @@ $.replyCreate = function (e) {
     let index = $('.cr_btn').index(e);
 
     let param = {
+        commentGroup:$('.comment_idx:eq('+ index +')').val(),
         boardIdx: $('#idx').val(),
         commentIdx: $('.comment_idx:eq('+ index +')').val(),
         content: $('.reply:eq('+ index +')').val()

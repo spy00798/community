@@ -1,6 +1,7 @@
 package com.board.community.boardModule.controller;
 
 import com.board.community.boardModule.service.CommentService;
+import com.board.community.common.db.jpa.entity.BoardEntity;
 import com.board.community.common.db.jpa.entity.CommentEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -37,5 +39,11 @@ public class CommentController {
     @RequestMapping(value = "/commentDeleteAction")
     public String CommentDeleteAction(CommentEntity commentEntity) {
         return commentService.CommentDeleteAction(commentEntity);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/commentList")
+    public List<CommentEntity> CommentList(CommentEntity commentEntity) {
+        return commentService.CommentList(commentEntity);
     }
 }
