@@ -31,7 +31,7 @@ public class CommentService {
         commentEntity.setCommentDate(new Date());
         commentEntity.setWriter(loginEntity.getUserName());
         commentEntity.setUserId(loginEntity.getUserId());
-//        commentEntity.setReplySequence(commentRepository.getByBoardIdxAndDepth(commentEntity.getBoardIdx()) + 1);
+//        commentEntity.setReplySequence(commentRepository.getByBoardIdxAndDepth(commentEntity.getBoardIdx(), 0) + 1);
 
         commentRepository.save(commentEntity);
         commentRepository.updateCommentGroup();
