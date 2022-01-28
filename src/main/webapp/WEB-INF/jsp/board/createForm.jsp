@@ -21,7 +21,3 @@
     </form>
 </div>
 <%@include file="../include/footer.jsp"%>
-<script>
-    document.title = "CreateForm";
-</script>
-</html>

@@ -11,7 +11,7 @@ $(document).ready(function () {
             [].forEach.call(data, item => {
                 let formatDate = new Date(item.commentDate);
                 console.log(item);
-                let str = ' <li class="comment">' +
+                let str = ' <li class="comment" style="margin-left: '+(item.depth * 20) +'px">' +
                     '                    <p>' +
                     '                        <input type="hidden" class="comment_idx" value="'+ item.idx +'">' +
                     '                        <span class="comment_writer">'+ item.writer +'</span>' +
@@ -47,6 +47,7 @@ $(document).ready(function () {
         }
     })
 });
+
 
 $.commentCreate = function () {
     let form = $('#commentForm')[0];

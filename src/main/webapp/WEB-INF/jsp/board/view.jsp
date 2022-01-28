@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@include file="../include/header.jsp" %>
+<div id=""
 <fieldset id="view">
     <input type="hidden" id="idx" value="${board.id}">
     <div id="title-area"><h3 class="view-title">${board.title}<br></h3><span id="writer">${board.writer}</span><span
@@ -120,6 +121,3 @@
 
 <%@include file="../include/footer.jsp" %>
 </div>
-<script>
-    document.title = `${board.title}`;
-</script>

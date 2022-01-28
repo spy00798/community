@@ -46,6 +46,3 @@
 
 </div>
 <%@include file="../include/footer.jsp"%>
-<script>
-    document.title= "BoardList";
-</script>

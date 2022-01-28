@@ -6,6 +6,7 @@ import com.board.community.common.db.jpa.entity.CommentEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
@@ -49,7 +50,7 @@ public class CommentController {
 
     @ResponseBody
     @RequestMapping(value = "/replyCreateAction")
-    public String ReplyCreateAction(CommentEntity commentEntity, HttpSession session) {
-        return commentService.ReplyCreateAction(commentEntity, session);
+    public String ReplyCreateAction(CommentEntity commentEntity, HttpSession session, @RequestParam(value = "parentIdx", required = true)String parentIdx) {
+        return commentService.ReplyCreateAction(commentEntity, session,parentIdx);
     }
 }

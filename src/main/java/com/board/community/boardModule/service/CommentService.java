@@ -87,14 +87,22 @@ public class CommentService {
      */
     public List<CommentEntity> CommentList(CommentEntity commentEntity) {
 
-        return commentRepository.findAllByBoardIdx(commentEntity.getBoardIdx());
+        return commentRepository.findAllByBoardIdxOrderByCommentGroupAscReplySequenceAscDepthAsc(commentEntity.getBoardIdx());
     }
 
-    public String ReplyCreateAction(CommentEntity commentEntity, HttpSession session) {
-        CommentEntity parentComment = commentRepository.getById(Long.valueOf(commentEntity.getCommentGroup())); // 답글이 달리는 부모 댓글의 데이터를 가져옴
+    /**
+     * FUNCTION:: 답글 생성 처리
+     * @param commentEntity
+     * @param session
+     * @param parentIdx
+     * @return
+     */
+    public String ReplyCreateAction(CommentEntity commentEntity, HttpSession session, String parentIdx) {
+        CommentEntity parentComment = commentRepository.getById(Long.valueOf(parentIdx)); // 답글이 달리는 부모 댓글의 데이터를 가져옴
         LoginEntity userInfo = (LoginEntity) session.getAttribute("user");
 
         commentEntity.setCommentDate(new Date());
+        commentEntity.setCommentGroup(parentComment.getCommentGroup());
         commentEntity.setDepth(parentComment.getDepth() + 1);// 답글의 depth설정
         commentEntity.setReplySequence(commentRepository.countByBoardIdxAndDepthAndCommentGroup(parentComment.getBoardIdx(), (parentComment.getDepth() + 1), commentEntity.getCommentGroup()) + 1 ); // 답글의 순서
         commentEntity.setWriter(userInfo.getUserName());

@@ -103,8 +103,5 @@ $.boardDelete = function () {
                 alert("통신실패")
             }
         })    
-    } else {
-        return;
     }
-    
 }

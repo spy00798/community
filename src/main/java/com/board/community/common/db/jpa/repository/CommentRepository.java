@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 public interface CommentRepository extends JpaRepository<CommentEntity, Long> {
-    List<CommentEntity> findAllByBoardIdx(Long id);
+    List<CommentEntity> findAllByBoardIdxOrderByCommentGroupAscReplySequenceAscDepthAsc(Long id);
 
     Integer countByBoardIdxAndDepth(long boardIdx, Integer depth);
     @Transactional
@@ -17,5 +17,9 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Long> {
     @Query(value = "update tbl_comment set commentGroup = idx where depth = 0", nativeQuery = true)
     void updateCommentGroup();
 
+
     Integer countByBoardIdxAndDepthAndCommentGroup(long boardIdx, Integer depth, Integer commentGroup);
+
+    @Transactional
+    void deleteByCommentGroup(Integer commentGroup);
 }
